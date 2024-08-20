@@ -72,3 +72,17 @@ Key Differences are in:
 
 ### Template in later C++ standards
 In C++11, we can use variadic templates to create generic functions and classes that can take a variable number of arguments. In C++14, we can use generic lambdas to create generic functions. In C++17, we can use fold expressions to create generic functions that can take a variable number of arguments. In C++20, we can use concepts to create generic functions and classes that can take a variable number of arguments.
+
+
+# ex00
+
+# ex01
+As per subject:
+> Implement a function template iter that takes 3 parameters and returns nothing.  
+	• The first parameter is the address of an array.  
+	• The second one is the length of the array.  
+	• The third one is a function that will be call on every element of the array.  
+Turn in a main.cpp file that contains your tests. Provide enough code to generate a
+test executable.
+Your iter function template must work with any type of array. The third parameter
+can be an instantiated function template.
