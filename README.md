@@ -86,3 +86,28 @@ Turn in a main.cpp file that contains your tests. Provide enough code to generat
 test executable.
 Your iter function template must work with any type of array. The third parameter
 can be an instantiated function template.
+
+## What is an instantiated function template?
+An instantiated function template is a specific version of a function template that has been created for a particular set of template arguments. In other words, when you provide concrete types for the template parameters of a function template, the compiler generates a specialized version of the function that works with those specific types. This process is called template instantiation.
+
+```cpp
+template <typename T>
+void print(const T& element) {
+    std::cout << element << " ";
+}
+
+int main() {
+    int intArray[] = {1, 2, 3, 4, 5};
+    double doubleArray[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+
+    // Instantiating the print template with int
+    print<int>(intArray[0]);
+
+    // Instantiating the print template with double
+    print<double>(doubleArray[1]);
+
+    return 0;
+}
+```
+
+So in cpp98 I will have to specify the type of T when calling the function. In cpp11 and later, you can use lambda expressions to create anonymous functions that can be passed as arguments to other functions.
