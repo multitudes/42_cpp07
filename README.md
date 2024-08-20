@@ -169,22 +169,22 @@ std::exception is thrown.
 • A member function size() that returns the number of elements in the array. This
 member function takes no parameter and musn’t modify the current instance.
 
+So we can create in a file `array.hpp` a class template that contains elements of type T. The implementation of the class template Array will be in a separate file `Array.tpp`. 
 
 
-## Where to include the template files `.tpp`?
+### Where to include the template files `.tpp`?
 The `.tpp` file is usually included at the end of the header file to ensure that the template definitions are available when the header file is included in other source files.  
 The `.tpp` file is not otherwise included in the source files.  
 
 ```cpp
 // Stack.h
-#ifndef STACK_H
-#define STACK_H
+#ifndef ARRAY_H
+#define ARRAY_H
 
 
+{some code...}
 
-[...]
-
-#include "Stack.tpp"
+#include "Array.tpp"
 #endif
 ```
 
