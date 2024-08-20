@@ -55,25 +55,20 @@ max(1, 2);
 
 The first call is unqualified, while the second call is qualified with the `global namespace (::)`. This distinction has significant implications when dealing with templates and Argument-Dependent Lookup (ADL).
 
-Unqualified Call:
+- Unqualified Call: The compiler searches for a suitable max function in the following namespaces:
+        - The namespace where the function call is made (if applicable).
+        - The namespaces of the arguments' types (if applicable).
+        - The global namespace. If multiple matching functions are found, the compiler applies ADL to determine the most appropriate one based on the types of arguments.
 
-    The compiler searches for a suitable max function in the following namespaces:
-        The namespace where the function call is made (if applicable).
-        The namespaces of the arguments' types (if applicable).
-        The global namespace.
-    If multiple matching functions are found, the compiler applies ADL to determine the most appropriate one based on the types of arguments.
-
-Qualified Call:
-
-    The compiler searches for a suitable max function only in the global namespace.
+- Qualified Call:
+    - The compiler searches for a suitable max function only in the global namespace.
     This explicitly specifies that the max function should be found in the global namespace, overriding any other potential matches.
 
-Key Differences:
-
-    Namespace Scope: Unqualified calls allow the compiler to search for functions in multiple namespaces, while qualified calls restrict the search to the global namespace.
-    ADL Applicability: ADL is applied to unqualified calls, allowing the compiler to find the most appropriate function based on argument types. Qualified calls bypass ADL and directly search for the function in the global namespace.
-    Template Specialization: If there are multiple template specializations for max in different namespaces, an unqualified call might lead to unexpected behavior. Using a qualified call can help avoid ambiguity in such cases.
-
+Key Differences are in: 
+ -Namespace Scope: Unqualified calls allow the compiler to search for functions in multiple namespaces, while qualified calls restrict the search to the global namespace.
+- ADL Applicability: ADL is applied to unqualified calls, allowing the compiler to find the most appropriate function based on argument types. Qualified calls bypass ADL and directly search for the function in the global namespace.
+- Template Specialization: If there are multiple template specializations for max in different namespaces, an unqualified call might lead to unexpected behavior. Using a qualified call can help avoid ambiguity in such cases.
 
 
+### Template in later C++ standards
 In C++11, we can use variadic templates to create generic functions and classes that can take a variable number of arguments. In C++14, we can use generic lambdas to create generic functions. In C++17, we can use fold expressions to create generic functions that can take a variable number of arguments. In C++20, we can use concepts to create generic functions and classes that can take a variable number of arguments.
