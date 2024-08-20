@@ -46,7 +46,7 @@ T max(T a, T b) {
 ```
 
 ### Templates and namespaces
-After having defined the template above, what is the difference between:
+After having defined the template above, what is the difference between the two calls below?:
 
 ```cpp
 max(1, 2);
@@ -109,5 +109,45 @@ int main() {
     return 0;
 }
 ```
-
 So in cpp98 I will have to specify the type of T when calling the function. In cpp11 and later, you can use lambda expressions to create anonymous functions that can be passed as arguments to other functions.
+
+If I have different function signatures, in cpp 98 I will have to specify the signature when calling my `iter` func. EX two different signatures:
+
+```cpp
+template <typename T>
+void print(const T& element) {
+	std::cout << element << " ";
+}
+
+
+template <typename T>
+T square(const T& element) {
+	return element * element;
+}
+
+// and in main when callint iter with the function print:
+iter<int, void(*)(const int&)>(intArray, sizeof(intArray) / sizeof(intArray[0]), print);
+// and with the functtion square:
+iter2<int, int(*)(const int&)>(intArray, sizeof(intArray) / sizeof(intArray[0]), square);
+```
+But interesting enough passing the `square` function to the iter function will work:
+```cpp
+iter<int, int(*)(const int&)>(intArray, sizeof(intArray) / sizeof(intArray[0]), square);
+but of course nothing will happen and the return value will be ignored.
+This would be the implementation of `iter` and `iter2`:
+
+```cpp
+template <typename T, typename FUNC>
+void iter(T* arr, int length, FUNC func) {
+    for (int i = 0; i < length; ++i) {
+        func(arr[i]);
+    }
+}
+
+template <typename T, typename FUNC>
+void iter2(T* arr, int length, FUNC func) {
+    for (int i = 0; i < length; ++i) {
+        arr[i] = func(arr[i]);
+    }
+}
+```
