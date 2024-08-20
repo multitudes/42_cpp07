@@ -3,6 +3,7 @@
 ## Introducing generic programming features in C++.
 In the 98 C++ standard, we can use templates to create generic functions and classes.  
 
+# ex00
 ### Class Templates 
 These allow you to define classes that can be instantiated with different data types.  
 An example somewhat simplified uses std::vector as the underlying data structure for the stack.
@@ -72,9 +73,6 @@ Key Differences are in:
 
 ### Template in later C++ standards
 In C++11, we can use variadic templates to create generic functions and classes that can take a variable number of arguments. In C++14, we can use generic lambdas to create generic functions. In C++17, we can use fold expressions to create generic functions that can take a variable number of arguments. In C++20, we can use concepts to create generic functions and classes that can take a variable number of arguments.
-
-
-# ex00
 
 # ex01
 As per subject:
@@ -151,3 +149,42 @@ void iter2(T* arr, int length, FUNC func) {
     }
 }
 ```
+
+# ex02
+As per subject:
+> Develop a class template Array that contains elements of type T and that implements
+the following behavior and functions:
+• Construction with no parameter: Creates an empty array.
+• Construction with an unsigned int n as a parameter: Creates an array of n elements
+initialized by default.
+Tip: Try to compile int * a = new int(); then display *a.
+• Construction by copy and assignment operator. In both cases, modifying either the
+original array or its copy after copying musn’t affect the other array.
+• You MUST use the operator new[] to allocate memory. Preventive allocation (al-
+locating memory in advance) is forbidden. Your program must never access non-
+allocated memory.
+• Elements can be accessed through the subscript operator: [ ].
+• When accessing an element with the [ ] operator, if its index is out of bounds, an
+std::exception is thrown.
+• A member function size() that returns the number of elements in the array. This
+member function takes no parameter and musn’t modify the current instance.
+
+
+
+## Where to include the template files `.tpp`?
+The `.tpp` file is usually included at the end of the header file to ensure that the template definitions are available when the header file is included in other source files.  
+The `.tpp` file is not otherwise included in the source files.  
+
+```cpp
+// Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+
+
+[...]
+
+#include "Stack.tpp"
+#endif
+```
+
