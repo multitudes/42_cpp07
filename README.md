@@ -60,10 +60,7 @@ The first call is unqualified, while the second call is qualified with the `glob
         - The namespace where the function call is made (if applicable).
         - The namespaces of the arguments' types (if applicable).
         - The global namespace. If multiple matching functions are found, the compiler applies ADL to determine the most appropriate one based on the types of arguments.
-
-- Qualified Call:
-    - The compiler searches for a suitable max function only in the global namespace.
-    This explicitly specifies that the max function should be found in the global namespace, overriding any other potential matches.
+- Qualified Call: The compiler searches for a suitable max function only in the global namespace. This explicitly specifies that the max function should be found in the global namespace, overriding any other potential matches.
 
 Key Differences are in: 
  -Namespace Scope: Unqualified calls allow the compiler to search for functions in multiple namespaces, while qualified calls restrict the search to the global namespace.
