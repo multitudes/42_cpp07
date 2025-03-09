@@ -6,7 +6,7 @@
 /*   By: lbrusa <lbrusa@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:51:02 by lbrusa            #+#    #+#             */
-/*   Updated: 2024/08/20 17:21:34 by lbrusa           ###   ########.fr       */
+/*   Updated: 2024/10/28 13:03:13 by lbrusa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,9 @@
  * the compiler will throw an error.
  */
 template <typename T, typename FUNC>
-void iter(T* arr, int length, FUNC func) {
-    for (int i = 0; i < length; ++i) {
+void iter(T* arr, std::size_t length, FUNC func) {
+    for (std::size_t i = 0; i < length; ++i) {
         func(arr[i]);
-    }
-}
-
-/**
- * @brief Iterates over an array and applies a function to each element.
- * 
- * Just for testing purposes.
- */
-template <typename T, typename FUNC>
-void iter2(T* arr, int length, FUNC func) {
-    for (int i = 0; i < length; ++i) {
-        arr[i] = func(arr[i]);
     }
 }
 
@@ -59,7 +47,7 @@ void iter2(T* arr, int length, FUNC func) {
  * If the element cannot be printed the error will be thrown at compile time.
  */
 template <typename T>
-void print(const T& element) {
+void print_func(const T& element) {
 	std::cout << element << " ";
 }
 
@@ -71,8 +59,8 @@ void print(const T& element) {
  * @param element The element to square.
  * @return T The squared element.
  * 
- * This is an example of a function that doesnt match the signature of the iter function.
- * We will have a compile time error if we try
+ * This is an example of a function that doesnt match the signature of the iter function 
+ * completely. There is a return value which will be discarded.
  */
 template <typename T>
 T square(const T& element) {

@@ -6,7 +6,7 @@
 /*   By: lbrusa <lbrusa@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:13:22 by lbrusa            #+#    #+#             */
-/*   Updated: 2024/08/20 11:49:20 by lbrusa           ###   ########.fr       */
+/*   Updated: 2024/10/28 13:01:09 by lbrusa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,37 @@
 #include <cassert>
 
 
+/**
+ * Testing the template functions
+ * Notice how they are being called from the global namespace like ::swap()
+ * This is good practice because there is another swap function in the std 
+ * namespace like std::swap
+ * Also about ADL https://stackoverflow.com/a/29706153/9497800
+ * 
+ */
 int main() {
 	std::cout << "Swapping two ints ====== " << std::endl;
 	int a = 5, b = 10;
 	std::cout << "before the swap a: " << a << " b: " << b << std::endl;
+	std::cout << "after we have a: " << a << " b: " << b << std::endl;
 	::swap(a, b);
-	// Assert that a is now 10 and b is 5
 	assert(a == 10);
 	assert(b == 5);
-	std::cout << "after we have a: " << a << " b: " << b << std::endl;
 
+	const int c_const = 5, d_const = 10;
+	// this will not work because the compiler will not be able to deduce the type of the template
+	::swap(c_const, d_const);
+
+	// there is another swap in std...
+	std::swap(a, b);
+	// Assert that a is now 10 and b is 5
+	assert(a == 5);
+	assert(b == 10);
+	
 	std::cout << "swapping the same value ==== " << std::endl;
 	std::cout << "before the swap x = 5" << std::endl;
 	int x = 5;
-	swap(x, x);
+	::swap(x, x);
 	// Assert that x remains unchanged	
 	assert(x == 5);
 	std::cout << "after the swap x = " << x << std::endl;
@@ -53,8 +70,8 @@ int main() {
 	std::cout << "after the swap d = " << d << " d2 = " << d2 << std::endl;
 
 	std::cout << "swapping two int references ==== " << std::endl;
-	int& ref1 = a;
-	int& ref2 = b;
+	int& ref1 = b;
+	int& ref2 = a;
 	std::cout << "before the swap ref1: " << ref1 << " ref2 : " << ref2 << std::endl;
 	::swap(ref1, ref2);
 	// Assert that the original variables are swapped

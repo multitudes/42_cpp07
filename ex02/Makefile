@@ -5,6 +5,8 @@ CXXFLAGS += -Wconversion -Wunreachable-code
 # -O0: Disables optimization to make debugging easier..
 CXXFLAGS += -g3 -O0
 
+LDFLAGS = -std=c++98
+
 CXX = c++
 
 NAME= array
@@ -15,7 +17,7 @@ OBJS= $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
 
 # This is to recompile the .o files if the makefile changes
 %.o: %.cpp Makefile
